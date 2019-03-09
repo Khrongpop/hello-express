@@ -21,7 +21,7 @@ const db = mysql.createConnection({   // config ค่าการเชื่�
   host: CLEARDB_DATABASE_HOST,
   user: CLEARDB_DATABASE_USER,
   password: CLEARDB_DATABASE_PASS,
-  database: CLEARDB_DATABASE_NAME
+  database: CLEARDB_DATABASE_NAME,
 })
 
 // db.connect() // เชื่อมต่อฐานข้อมูล
@@ -79,4 +79,4 @@ app.get('/users', (req, res) => {   // Router เวลาเรียกใช�
 
 app.listen(port, () => {
   console.log(`Start server at port ${port}.`)
-}
+})
