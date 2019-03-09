@@ -1,10 +1,20 @@
 const express = require('express')
 const app = express()
 const books = require('./db')
-const bodyParser = require('body-parser')
 
+const bodyParser = require('body-parser')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
+
+const mysql = require('mysql')
+const db = mysql.createConnection({   // config ค่าการเชื่อมต่อฐานข้อมูล
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'bandsquare_tbl'
+})
+
+db.connect() // เชื่อมต่อฐานข้อมูล
 
 app.get('/', (req, res) => {
   res.send('Hello World')
@@ -32,6 +42,15 @@ app.delete('/books/:id', (req, res) => {
   const deletedIndex = books.findIndex(book => book.id === req.params.id)
   books.splice(deletedIndex, 1)
   res.status(204).send()
+})
+
+app.get('/users', (req, res) => {   // Router เวลาเรียกใช้งาน
+  let sql = 'SELECT * FROM users'  // คำสั่ง sql
+  let query = db.query(sql, (err, results) => { // สั่ง Query คำสั่ง sql
+    if (err) throw err  // ดัก error
+    console.log(results) // แสดงผล บน Console 
+    res.json(results)   // สร้างผลลัพธ์เป็น JSON ส่งออกไปบน Browser
+  })
 })
 
 app.listen(3000, () => {
