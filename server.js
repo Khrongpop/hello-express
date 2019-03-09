@@ -15,7 +15,7 @@ var CLEARDB_DATABASE_URL = process.env.CLEARDB_DATABASE_URL
 var CLEARDB_DATABASE_HOST = process.env.CLEARDB_DATABASE_HOST || `localhost`
 var CLEARDB_DATABASE_USER = process.env.CLEARDB_DATABASE_USER || `root`
 var CLEARDB_DATABASE_PASS = process.env.CLEARDB_DATABASE_PASS || ``
-var CLEARDB_DATABASE_NAME = process.env.CLEARDB_DATABASE_PASS || `bandsquare_tbl`
+var CLEARDB_DATABASE_NAME = process.env.CLEARDB_DATABASE_NAME || `bandsquare_tbl`
 
 const db = mysql.createConnection({   // config ค่าการเชื่อมต่อฐานข้อมูล
   host: CLEARDB_DATABASE_HOST,
@@ -25,6 +25,10 @@ const db = mysql.createConnection({   // config ค่าการเชื่�
 })
 
 // db.connect() // เชื่อมต่อฐานข้อมูล
+db.connect(function (err) {
+  if (err)  throw err 
+  console.log('You are now connected...')
+})
 
 app.get('/', (req, res) => {
   // res.send('Hello World ')
@@ -64,15 +68,15 @@ app.delete('/books/:id', (req, res) => {
   res.status(204).send()
 })
 
-// app.get('/users', (req, res) => {   // Router เวลาเรียกใช้งาน
-//   let sql = 'SELECT * FROM users'  // คำสั่ง sql
-//   let query = db.query(sql, (err, results) => { // สั่ง Query คำสั่ง sql
-//     if (err) throw err  // ดัก error
-//     console.log(results) // แสดงผล บน Console 
-//     res.json(results)   // สร้างผลลัพธ์เป็น JSON ส่งออกไปบน Browser
-//   })
-// })
+app.get('/users', (req, res) => {   // Router เวลาเรียกใช้งาน
+  let sql = 'SELECT * FROM users'  // คำสั่ง sql
+  let query = db.query(sql, (err, results) => { // สั่ง Query คำสั่ง sql
+    if (err) throw err  // ดัก error
+    console.log(results) // แสดงผล บน Console 
+    res.json(results)   // สร้างผลลัพธ์เป็น JSON ส่งออกไปบน Browser
+  })
+})
 
 app.listen(port, () => {
   console.log(`Start server at port ${port}.`)
-})
+}
