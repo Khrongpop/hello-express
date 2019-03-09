@@ -16,6 +16,7 @@ var CLEARDB_DATABASE_HOST = process.env.CLEARDB_DATABASE_HOST || `localhost`
 var CLEARDB_DATABASE_USER = process.env.CLEARDB_DATABASE_USER || `root`
 var CLEARDB_DATABASE_PASS = process.env.CLEARDB_DATABASE_PASS || ``
 var CLEARDB_DATABASE_NAME = process.env.CLEARDB_DATABASE_PASS || `bandsquare_tbl`
+
 const db = mysql.createConnection({   // config ค่าการเชื่อมต่อฐานข้อมูล
   host: CLEARDB_DATABASE_HOST,
   user: CLEARDB_DATABASE_USER,
@@ -23,14 +24,18 @@ const db = mysql.createConnection({   // config ค่าการเชื่�
   database: CLEARDB_DATABASE_NAME
 })
 
-db.connect() // เชื่อมต่อฐานข้อมูล
+// db.connect() // เชื่อมต่อฐานข้อมูล
 
 app.get('/', (req, res) => {
   // res.send('Hello World ')
   res.send(JSON.stringify(
     { 
       message: `Hello World`,
-      CLEARDB_DATABASE_URL: `${CLEARDB_DATABASE_URL}`
+      CLEARDB_DATABASE_URL: `${CLEARDB_DATABASE_URL}`,
+      CLEARDB_DATABASE_HOST: `${CLEARDB_DATABASE_HOST}`,
+      CLEARDB_DATABASE_USER: `${CLEARDB_DATABASE_USER}`,
+      CLEARDB_DATABASE_PASS: `${CLEARDB_DATABASE_PASS}`,
+      CLEARDB_DATABASE_NAME: `${CLEARDB_DATABASE_NAME}`,
     }
   ));
 })
