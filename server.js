@@ -12,14 +12,18 @@ const mysql = require('mysql')
 
 var port = process.env.PORT || 3000
 var CLEARDB_DATABASE_URL = process.env.CLEARDB_DATABASE_URL 
+var CLEARDB_DATABASE_HOST = process.env.CLEARDB_DATABASE_HOST || `localhost`
+var CLEARDB_DATABASE_USER = process.env.CLEARDB_DATABASE_USER || `root`
+var CLEARDB_DATABASE_PASS = process.env.CLEARDB_DATABASE_PASS || ``
+var CLEARDB_DATABASE_NAME = process.env.CLEARDB_DATABASE_PASS || `bandsquare_tbl`
 const db = mysql.createConnection({   // config ค่าการเชื่อมต่อฐานข้อมูล
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'bandsquare_tbl'
+  host: CLEARDB_DATABASE_HOST,
+  user: CLEARDB_DATABASE_USER,
+  password: CLEARDB_DATABASE_PASS,
+  database: CLEARDB_DATABASE_NAME
 })
 
-// db.connect() // เชื่อมต่อฐานข้อมูล
+db.connect() // เชื่อมต่อฐานข้อมูล
 
 app.get('/', (req, res) => {
   // res.send('Hello World ')
