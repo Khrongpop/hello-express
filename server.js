@@ -1,5 +1,5 @@
 const express = require('express')
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 3000
 const app = express()
 
 const books = require('./db')
@@ -7,8 +7,11 @@ const books = require('./db')
 const bodyParser = require('body-parser')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-
+// CLEARDB_DATABASE_URL
 const mysql = require('mysql')
+
+var port = process.env.PORT || 3000
+var CLEARDB_DATABASE_URL = process.env.CLEARDB_DATABASE_URL 
 const db = mysql.createConnection({   // config ค่าการเชื่อมต่อฐานข้อมูล
   host: 'localhost',
   user: 'root',
@@ -19,7 +22,13 @@ const db = mysql.createConnection({   // config ค่าการเชื่�
 // db.connect() // เชื่อมต่อฐานข้อมูล
 
 app.get('/', (req, res) => {
-  res.send('Hello World')
+  // res.send('Hello World ')
+  res.send(JSON.stringify(
+    { 
+      message: `Hello World`,
+      CLEARDB_DATABASE_URL: `${CLEARDB_DATABASE_URL}`
+    }
+  ));
 })
 
 app.get('/books', (req, res) => {
