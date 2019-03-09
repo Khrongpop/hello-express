@@ -1,5 +1,7 @@
 const express = require('express')
+var port = process.env.PORT || 3000;
 const app = express()
+
 const books = require('./db')
 
 const bodyParser = require('body-parser')
@@ -53,6 +55,6 @@ app.get('/users', (req, res) => {   // Router เวลาเรียกใช�
   })
 })
 
-app.listen(3000, () => {
+app.listen(port, () => {
   console.log('Start server at port 3000.')
 })
