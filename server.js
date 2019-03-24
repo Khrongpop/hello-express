@@ -84,7 +84,7 @@ app.all('*', function(req, res, next) {
 //     res.json(results)   // สร้างผลลัพธ์เป็น JSON ส่งออกไปบน Browser
 //   })
 // })
-
+app.use(allowCrossDomain)
 app.listen(port, () => {
   console.log(`Start server at port http://www.locahost:${port}.`)
 })
