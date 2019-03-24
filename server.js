@@ -68,6 +68,14 @@ app.delete('/books/:id', (req, res) => {
   res.status(204).send()
 })
 
+app.all('*', function(req, res, next) {
+  var origin = req.get('origin'); 
+  res.header('Access-Control-Allow-Origin', origin);
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
+
 // app.get('/users', (req, res) => {   // Router เวลาเรียกใช้งาน
 //   let sql = 'SELECT * FROM users'  // คำสั่ง sql
 //   let query = db.query(sql, (err, results) => { // สั่ง Query คำสั่ง sql
