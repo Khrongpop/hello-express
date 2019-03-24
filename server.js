@@ -25,10 +25,10 @@ const db = mysql.createConnection({   // config ค่าการเชื่�
 })
 
 // db.connect() // เชื่อมต่อฐานข้อมูล
-db.connect(function (err) {
-  if (err)  throw err 
-  console.log('You are now connected...')
-})
+// db.connect(function (err) {
+//   if (err)  throw err 
+//   console.log('You are now connected...')
+// })
 
 app.get('/', (req, res) => {
   // res.send('Hello World ')
@@ -68,15 +68,15 @@ app.delete('/books/:id', (req, res) => {
   res.status(204).send()
 })
 
-app.get('/users', (req, res) => {   // Router เวลาเรียกใช้งาน
-  let sql = 'SELECT * FROM users'  // คำสั่ง sql
-  let query = db.query(sql, (err, results) => { // สั่ง Query คำสั่ง sql
-    if (err) throw err  // ดัก error
-    console.log(results) // แสดงผล บน Console 
-    res.json(results)   // สร้างผลลัพธ์เป็น JSON ส่งออกไปบน Browser
-  })
-})
+// app.get('/users', (req, res) => {   // Router เวลาเรียกใช้งาน
+//   let sql = 'SELECT * FROM users'  // คำสั่ง sql
+//   let query = db.query(sql, (err, results) => { // สั่ง Query คำสั่ง sql
+//     if (err) throw err  // ดัก error
+//     console.log(results) // แสดงผล บน Console 
+//     res.json(results)   // สร้างผลลัพธ์เป็น JSON ส่งออกไปบน Browser
+//   })
+// })
 
 app.listen(port, () => {
-  console.log(`Start server at port ${port}.`)
+  console.log(`Start server at port http://www.locahost:${port}.`)
 })
