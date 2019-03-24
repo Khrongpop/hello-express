@@ -1,7 +1,7 @@
 const express = require('express')
 var port = process.env.PORT || 3000
 const app = express()
-
+const cors = require('cors')
 const books = require('./db')
 
 const bodyParser = require('body-parser')
@@ -29,6 +29,8 @@ const db = mysql.createConnection({   // config ค่าการเชื่�
 //   if (err)  throw err 
 //   console.log('You are now connected...')
 // })
+// app.use(allowCrossDomain)
+app.use(cors());
 
 app.get('/', (req, res) => {
   // res.send('Hello World ')
@@ -84,7 +86,7 @@ app.all('*', function(req, res, next) {
 //     res.json(results)   // สร้างผลลัพธ์เป็น JSON ส่งออกไปบน Browser
 //   })
 // })
-app.use(allowCrossDomain)
+
 app.listen(port, () => {
   console.log(`Start server at port http://www.locahost:${port}.`)
 })
