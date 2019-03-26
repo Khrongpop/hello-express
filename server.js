@@ -122,8 +122,8 @@ var sendNotification = function(data) {
 };
 
 var message = { 
-  app_id: `${app_id}`,
-  contents: {"en": "English Message"},
+  app_id: app_id,
+  contents: {"en": "Thai Message"},
   included_segments: ["All"]
 };
 
