@@ -129,8 +129,6 @@ var message = {
 
 app.get('/testnoti', (req, res) => {
   sendNotification(message);
-  console.log(`app_id`,app_id)
-  console.log(`api_key`,api_key)
   res.json(books)
 })
 
