@@ -87,6 +87,52 @@ app.all('*', function(req, res, next) {
 //   })
 // })
 
+
+var app_id = process.env.OSAPPID 
+var api_key = process.env.OSAPIKEY 
+var sendNotification = function(data) {
+  var headers = {
+    "Content-Type": "application/json; charset=utf-8",
+    "Authorization": "Basic "+api_key
+  };
+  
+  var options = {
+    host: "onesignal.com",
+    port: 443,
+    path: "/api/v1/notifications",
+    method: "POST",
+    headers: headers
+  };
+  
+  var https = require('https');
+  var req = https.request(options, function(res) {  
+    res.on('data', function(data) {
+      console.log("Response:");
+      console.log(JSON.parse(data));
+    });
+  });
+  
+  req.on('error', function(e) {
+    console.log("ERROR:");
+    console.log(e);
+  });
+  
+  req.write(JSON.stringify(data));
+  req.end();
+};
+
+var message = { 
+  app_id: `${app_id}`,
+  contents: {"en": "English Message"},
+  included_segments: ["All"]
+};
+
+app.get('/testnoti', (req, res) => {
+  sendNotification(message);
+  res.json(books)
+})
+
+
 app.listen(port, () => {
   console.log(`Start server at port http://www.locahost:${port}.`)
 })
